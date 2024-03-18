@@ -1,0 +1,53 @@
+Các hàm chuyển đổi địa chỉ:
+
+Chuyển đổi địa chỉ IP dạng xâu sang số nguyên 32 bit (IPv4)
+in_addr_t inet_addr (
+    const char *cp // xâu ký tự chứa địa chỉ IPv4
+) => Hàm trả về địa chỉ dạng số nguyên, -1 nếu gặp lỗi
+
+Chuyển đổi địa chỉ IP dạng xâu sang cấu trúc in_addr
+int inet_aton (
+    const char *cp, // Xâu ký tự chứa địa chỉ IP
+    struct in_addr *inp // Cấu trúc địa chỉ IP
+) => Hàm trả về 1 nếu thành công, 0 nếu gặp lỗi
+
+Chuyển đổi địa chỉ từ dạng in_addr sang dạng xâu (IPv4)
+    char *inet_ntoa (
+    struct in_addr in  // Cấu trúc địa chỉ IPv4
+) => Hàm trả về chuỗi ký tự chứa địa chỉ
+
+
+Chuyển đổi từ dạng số sang dạng xâu (cho IPv4 và IPv6)
+const char *inet_ntop (
+    int af,         
+    // AF_INET hoặc AF_INET6
+    const void *cp, // con trỏ in_addr hoặc in6_addr
+    char *buf,      
+    // xâu ký tự chứa địa chỉ 
+    socklen_t len   // INET_ADDRSTRLEN hoặc INET6_ADDRSTRLEN
+) => hàm trả về xâu ký tự chứa địa chỉ, trả về NULL nếu gặp lỗi
+
+Chuyển đổi từ dạng xâu sang dạng số (cho IPv4 và IPv6)
+int inet_pton (
+    int af,         
+    // AF_INET hoặc AF_INET6
+    const char *cp, // xâu địa chỉ
+    void *buf       
+    // con trỏ in_addr hoặc in6_addr
+) => Hàm trả về 1 nếu thành công, 0 nếu xâu ký tự không hợp lệ, -1 
+nếu gặp lỗi khác
+
+==========================================================================
+Các hàm chuyển đổi giữa big endian và little endian
+Chuyển đổi little-endian => big-endian (network order)
+// Chuyển đổi 4 byte từ little-endian=>big-endian
+uint32_t htonl (uint32_t hostlong)
+// Chuyển đổi 2 byte từ little-endian=>big-endian
+uint16_t htons (uint16_t hostshort)
+
+Chuyển đổi big-endian => little-endian (host order)
+// Chuyển 4 byte từ big-endian=>little-endian
+uint32_t ntohl (uint32_t netlong)
+// Chuyển 2 byte từ big-endian=>little-endian
+uint16_t ntohs (uint16_t netshort)
+
